@@ -9,7 +9,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Flagger.Migration", "Flagge
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2EE92D2E-26EB-4B0A-9B78-4E3C9FF4DAB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flagger.Test", "XUnitTestProject1\Flagger.Test.csproj", "{4873BD8E-C9D0-4A46-BBB2-046400DDE18B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flagger.Test", "Flagger.Test\Flagger.Test.csproj", "{4873BD8E-C9D0-4A46-BBB2-046400DDE18B}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
