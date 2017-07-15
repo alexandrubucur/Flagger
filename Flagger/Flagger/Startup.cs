@@ -65,6 +65,7 @@ namespace Flagger
             _container.RegisterMvcViewComponents(app);
 
             _container.RegisterSingleton<IFlagGateway>(() => new FlagGateway(Configuration.GetConnectionString("FlaggerDb")));
+            _container.RegisterSingleton<IUserGateway>(() => new UserGateway(Configuration.GetConnectionString("FlaggerDb")));
 
             _container.RegisterSingleton(app.ApplicationServices.GetService<ILoggerFactory>());
 
