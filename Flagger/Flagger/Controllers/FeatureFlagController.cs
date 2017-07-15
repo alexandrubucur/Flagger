@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
 using Flagger.Core;
 using Flagger.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +12,7 @@ namespace Flagger.Controllers
     public class FeatureFlagController : Controller
     {
         private readonly IFlagGateway _flagGateway;
+        public readonly int SqlDuplicateExceptionNumber = 2601;
 
         public FeatureFlagController(IFlagGateway flagGateway)
         {
@@ -31,9 +32,21 @@ namespace Flagger.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]string name)
+        public IActionResult Post([FromBody]string name)
         {
-            _flagGateway.Save(name);
+            try
+            {
+                _flagGateway.Save(name);
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                if (e.Number == SqlDuplicateExceptionNumber)
+                {
+                    return StatusCode(400, $"{name} feature flag already exists");
+                }
+            }
+            return StatusCode(200);
         }
 
         [HttpPut("{id}")]

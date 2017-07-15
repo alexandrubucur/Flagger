@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Flagger.Core;
 using Flagger.Model;
@@ -10,6 +12,7 @@ namespace Flagger.Controllers
     public class UserController : Controller
     {
         private readonly IUserGateway _userGateway;
+        public readonly int SqlDuplicateExceptionNumber = 2601;
 
         public UserController(IUserGateway userGateway)
         {
@@ -29,9 +32,21 @@ namespace Flagger.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]string name)
+        public ActionResult Post([FromBody]string name)
         {
-            _userGateway.Save(name);
+            try
+            {
+                _userGateway.Save(name);
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                if (e.Number == SqlDuplicateExceptionNumber)
+                {
+                    return StatusCode(400, $"{name} user already exists");
+                }
+            }
+            return StatusCode(200);
         }
 
         [HttpPut("{id}")]

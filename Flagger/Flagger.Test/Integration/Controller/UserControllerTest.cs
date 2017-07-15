@@ -1,7 +1,9 @@
 using Flagger.Controllers;
 using Flagger.Core;
 using Flagger.Model;
+using Flagger.Test.Utils;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
@@ -39,6 +41,22 @@ namespace Flagger.Test.Integration.Controller
             controller.Post("test");
 
             mockRepo.Verify(s => s.Save("test"));
+        }
+
+        [Fact]
+        public void PreventDuplicates()
+        {
+            var sqlException = new SqlExceptionBuilder().WithErrorNumber(2601).WithErrorMessage("Duplicates key").Build();
+
+            var mockRepo = new Mock<IUserGateway>();
+
+            mockRepo.Setup(s => s.Save("test")).Throws(sqlException);
+
+            var controller = new UserController(mockRepo.Object);
+
+            var result = (ObjectResult)controller.Post("test");
+
+            result.StatusCode.ShouldBeEquivalentTo(400);
         }
     }
 }
