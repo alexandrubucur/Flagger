@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flagger", "Flagger\Flagger.csproj", "{52890B2B-242F-4E68-9490-6A595FE6036A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Flagger.Migration", "Flagger.Migration\Flagger.Migration.shproj", "{7F65360C-9F62-4002-AA96-BB3686CA6F83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2EE92D2E-26EB-4B0A-9B78-4E3C9FF4DAB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flagger.Test", "XUnitTestProject1\Flagger.Test.csproj", "{4873BD8E-C9D0-4A46-BBB2-046400DDE18B}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Flagger.Migration\Flagger.Migration.projitems*{7f65360c-9f62-4002-aa96-bb3686ca6f83}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52890B2B-242F-4E68-9490-6A595FE6036A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52890B2B-242F-4E68-9490-6A595FE6036A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52890B2B-242F-4E68-9490-6A595FE6036A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52890B2B-242F-4E68-9490-6A595FE6036A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4873BD8E-C9D0-4A46-BBB2-046400DDE18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4873BD8E-C9D0-4A46-BBB2-046400DDE18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4873BD8E-C9D0-4A46-BBB2-046400DDE18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4873BD8E-C9D0-4A46-BBB2-046400DDE18B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4873BD8E-C9D0-4A46-BBB2-046400DDE18B} = {2EE92D2E-26EB-4B0A-9B78-4E3C9FF4DAB0}
+	EndGlobalSection
+EndGlobal
