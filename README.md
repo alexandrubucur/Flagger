@@ -8,14 +8,14 @@ Asp.net Core Feature flag api.
 - [`GET` /api/user/:id](#get-apiuser-1) - Get user by id
 - [`POST` /api/user](#post-add-an-user) - Add an user
 - [`DELETE` /api/user/:id](#delete-delete-user) - Delete user
-- [`GET` /api/featureflag](#get-apifeatureflag) - Get feature list
-- [`GET` /api/featureflag/:id](#get-apifeatureflag-1) - Get feature by id
-- [`POST` /api/featureflag](#post-add-an-featureflag) - Add an feature
-- [`DELETE` /api/featureflag/:id](#delete-delete-featureflag) - Delete feature
-- [`GET` /api/flagconfiguration](#get-all-configurations) - Get all configurations
-- [`GET` /api/flagconfiguration/:username](#get-configurations-by-username) - Get configurations by username
-- [`POST` /api/flagconfiguration](#post-add-a-configuration) - Add a configuration
-- [`DELETE` /api/flagconfiguration](#delete-configuration) - Delete configuration
+- [`GET` /api/featureflag](#get-apifeatureflag-2) - Get feature list
+- [`GET` /api/featureflag/:id](#get-apifeatureflag-3) - Get feature by id
+- [`POST` /api/featureflag](#post-add-a-feature) - Add an feature
+- [`DELETE` /api/featureflag/:id](#delete-delete-feature) - Delete feature
+- [`GET` /api/flagconfiguration](#get-apiflagconfiguration) - Get all configurations
+- [`GET` /api/flagconfiguration/:username](#get-apiflagconfiguration-1) - Get configurations by username
+- [`POST` /api/flagconfiguration](#post-setup-configuration) - Add a configuration
+- [`DELETE` /api/flagconfiguration](#delete-delete-configuration) - Delete configuration
 
 ### API Documentation
 #### `GET` /api/featureflag
