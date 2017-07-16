@@ -58,5 +58,33 @@ namespace Flagger.Test.Integration.Controller
 
             result.StatusCode.ShouldBeEquivalentTo(400);
         }
+
+        [Fact]
+        public void Delete()
+        {
+            var mockRepo = new Mock<IUserGateway>();
+
+            var controller = new UserController(mockRepo.Object);
+
+            controller.Delete(1);
+
+            mockRepo.Verify(s => s.Delete(1));
+        }
+
+        [Fact]
+        public void CannotDeleteAnUsedUser()
+        {
+            var sqlException = new SqlExceptionBuilder().WithErrorNumber(SqlExceptions.SqlForeignKeyViolation).WithErrorMessage("Foreign key violation").Build();
+
+            var mockRepo = new Mock<IUserGateway>();
+
+            mockRepo.Setup(s => s.Delete(1)).Throws(sqlException);
+
+            var controller = new UserController(mockRepo.Object);
+
+            var result = (ObjectResult)controller.Delete(1);
+
+            result.StatusCode.ShouldBeEquivalentTo(400);
+        }
     }
 }
