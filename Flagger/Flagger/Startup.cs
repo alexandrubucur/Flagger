@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Flagger.Core;
 using Flagger.Service;
+using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
@@ -39,12 +38,32 @@ namespace Flagger
         {
             services.AddMvc();
 
+
             services.AddSingleton<IControllerActivator>(
                 new SimpleInjectorControllerActivator(_container));
             services.AddSingleton<IViewComponentActivator>(
                 new SimpleInjectorViewComponentActivator(_container));
 
             services.UseSimpleInjectorAspNetRequestScoping(_container);
+
+
+            services.AddIdentityServer()
+                .AddTemporarySigningCredential()
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryClients(Config.GetClients())
+                .AddTestUsers(GetUsers());
+        }
+
+        private List<TestUser> GetUsers()
+        {
+            return _container.GetInstance<IUserGateway>().Get()
+                .Select(s => new TestUser
+                {
+                    SubjectId = s.Id_User.ToString(),
+                    Username = s.UserName,
+                    Password = s.Password
+                })
+                .ToList();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -54,7 +73,15 @@ namespace Flagger
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:63518",
+                RequireHttpsMetadata = false,
+                ApiName = "flagger"
+            });
+
             app.UseMvc();
+
         }
 
         private void InitializeContainer(IApplicationBuilder app)
