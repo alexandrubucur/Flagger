@@ -4,11 +4,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using Flagger.Core;
 using Flagger.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flagger.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserGateway _userGateway;
