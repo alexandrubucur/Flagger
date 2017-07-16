@@ -1,4 +1,4 @@
-# Flagger <img src="https://www.umpqua.edu/images/areas-of-study/community-workforce/Health_Safety/Flagger_1_200_Fotolia_52130866.jpg " width="70" height="70" />
+#  Flagger <img src="https://www.umpqua.edu/images/areas-of-study/community-workforce/Health_Safety/Flagger_1_200_Fotolia_52130866.jpg " width="70" height="70" /><img src="https://image.ibb.co/faOYaF/go.png" width="70" height="70" />
 
 Asp.net Core Wep Api for Feature Flag (aka Feature Toggle) management and configuration.
 
