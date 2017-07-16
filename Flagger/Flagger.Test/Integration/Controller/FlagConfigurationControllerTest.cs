@@ -69,5 +69,23 @@ namespace Flagger.Test.Integration.Controller
 
             result.ShouldAllBeEquivalentTo(new[] { configuration });
         }
+
+        [Fact]
+        public void Delete()
+        {
+            var mockRepo = new Mock<IConfigurationGateway>();
+
+            var controller = new FlagConfigurationController(mockRepo.Object);
+
+            var deleteConfiguration = new DeleteConfiguration
+            {
+                User = "username",
+                Features = new [] {"Flag1", "Flag2"}
+            };
+
+            controller.Delete(deleteConfiguration);
+
+            mockRepo.Verify(s => s.Delete(deleteConfiguration));
+        }
     }
 }

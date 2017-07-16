@@ -8,8 +8,87 @@ Asp.net Core Feature flag api.
 - [`GET` /api/user/:id](#get-apiuser-1) - Get user by id
 - [`POST` /api/user](#post-add-an-user) - Add an user
 - [`DELETE` /api/user/:id](#delete-delete-user) - Delete user
+- [`GET` /api/featureflag](#get-apifeatureflag) - Get feature list
+- [`GET` /api/featureflag/:id](#get-apifeatureflag-1) - Get feature by id
+- [`POST` /api/featureflag](#post-add-an-featureflag) - Add an feature
+- [`DELETE` /api/featureflag/:id](#delete-delete-featureflag) - Delete feature
 
 ### API Documentation
+#### `GET` /api/featureflag
+ Get user list.
+- Method: `GET`
+- Endpoint: `/api/featureflag`
+- Responses:
+    * 200 OK
+    ```json
+    [
+        {
+            "id_User": 1,
+            "userName": "Admin",
+            "admin": true
+        },
+        {
+            "id_User": 3,
+            "userName": "Service1",
+            "admin": false
+        },
+        {
+            "id_User": 4,
+            "userName": "Service2",
+            "admin": false
+        }
+    ]
+    ```
+
+#### `GET` /api/featureflag
+ Get user by id.
+- Method: `GET`
+- Endpoint: `/api/featureflag/:id`
+- Responses:
+    * 200 OK
+    ```json
+    {
+        "id_User": 1,
+        "userName": "Admin",
+        "admin": true
+    }
+    ```
+
+#### `POST` `Add an user`
+Create a new feature flag.
+- Method: `POST`
+- Endpoint: `/api/user`
+- Input:
+    The `Content-Type` HTTP header should be set to `application/json`
+
+    ```json
+   "Admin"
+    ```
+- Responses:
+    * 200 Ok
+
+    * 400 Bad Request
+    ```json
+    {
+      "message":":userName user already exists"
+    }
+    ```
+    
+#### `DELETE` `Delete user`
+ Delete user.
+ - Method: `DELETE`
+ - Endpoint: `/api/user/:id` 
+ - Responses:
+    * 200 Ok
+
+    * 400 Bad Request
+    ```json
+    {
+      "message":":Cannot delete an used user."
+    }
+    ```
+
+
 #### `GET` /api/user
  Get user list.
 - Method: `GET`

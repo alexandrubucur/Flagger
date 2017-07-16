@@ -8,5 +8,6 @@ namespace Flagger.Core
         IEnumerable<Configuration> Get();
         Configuration Get(string userName);
         void Save(Configuration configuration);
+        void Delete(DeleteConfiguration configuration);
     }
 }

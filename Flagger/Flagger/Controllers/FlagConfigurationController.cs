@@ -24,15 +24,19 @@ namespace Flagger.Controllers
         [HttpGet("{userName}")]
         public Configuration Get(string userName)
         {
-            var configuration = _configurationGateway.Get(userName);
-
-            return configuration;
+            return _configurationGateway.Get(userName);
         }
 
         [HttpPost]
         public void Post([FromBody]Configuration configuration)
         {
             _configurationGateway.Save(configuration);
+        }
+
+        [HttpDelete]
+        public void Delete([FromBody] DeleteConfiguration configuration)
+        {
+            _configurationGateway.Delete(configuration);
         }
     }
 }

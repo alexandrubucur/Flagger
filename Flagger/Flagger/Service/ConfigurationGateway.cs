@@ -75,6 +75,21 @@ namespace Flagger.Service
             }
         }
 
+        public void Delete(DeleteConfiguration configuration)
+        {
+            using (var sqlConnection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"DELETE Configuration
+                                       FROM Configuration c
+                                       INNER JOIN Flag f ON c.Flag_Id = f.Id_Flag
+                                       INNER JOIN [User] u ON c.User_Id = u.Id_User
+                                       WHERE u.UserName = @username AND f.Name in @names";
+
+                sqlConnection.Execute(sql, new {username = configuration.User, names = configuration.Features});
+
+            }
+        }
+
         private static void CreateTemporaryTable(Configuration configuration, IDbConnection sqlConnection, IDbTransaction transaction)
         {
             const string createCommand = @"CREATE TABLE #tempConfiguration(
