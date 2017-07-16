@@ -1,4 +1,6 @@
-﻿namespace Flagger.Model
+﻿using System.Collections.Generic;
+
+namespace Flagger.Model
 {
     public class Flag
     {

@@ -7,5 +7,6 @@ namespace Flagger.Core
     {
         IEnumerable<Flag> Get();
         void Save(string name);
+        void Delete(int id);
     }
 }

@@ -46,7 +46,7 @@ namespace Flagger.Test.Integration.Controller
         [Fact]
         public void PreventDuplicates()
         {
-            var sqlException = new SqlExceptionBuilder().WithErrorNumber(2601).WithErrorMessage("Duplicates key").Build();
+            var sqlException = new SqlExceptionBuilder().WithErrorNumber(SqlExceptions.SqlDuplicateExceptionNumber).WithErrorMessage("Duplicates key").Build();
 
             var mockRepo = new Mock<IFlagGateway>();
 
@@ -55,6 +55,34 @@ namespace Flagger.Test.Integration.Controller
             var controller = new FeatureFlagController(mockRepo.Object);
 
             var result = (ObjectResult)controller.Post("test");
+
+            result.StatusCode.ShouldBeEquivalentTo(400);
+        }
+
+        [Fact]
+        public void Delete()
+        {
+            var mockRepo = new Mock<IFlagGateway>();
+
+            var controller = new FeatureFlagController(mockRepo.Object);
+
+            controller.Delete(1);
+
+            mockRepo.Verify(s => s.Delete(1));
+        }
+
+        [Fact]
+        public void CannotDeleteAnUsedFlag()
+        {
+            var sqlException = new SqlExceptionBuilder().WithErrorNumber(SqlExceptions.SqlForeignKeyViolation).WithErrorMessage("Foreign key violation").Build();
+
+            var mockRepo = new Mock<IFlagGateway>();
+
+            mockRepo.Setup(s => s.Delete(1)).Throws(sqlException);
+
+            var controller = new FeatureFlagController(mockRepo.Object);
+
+            var result = (ObjectResult)controller.Delete(1);
 
             result.StatusCode.ShouldBeEquivalentTo(400);
         }

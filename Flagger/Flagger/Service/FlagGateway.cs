@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using Dapper;
 using Flagger.Core;
 using Flagger.Model;
@@ -36,6 +33,16 @@ namespace Flagger.Service
                 const string sql = @"INSERT Flag(Name) VALUES(@name)";
 
                 sqlConnection.Execute(sql, new {name});
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var sqlConnection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"DELETE FROM Flag WHERE Id_Flag = @id";
+
+                sqlConnection.Execute(sql, new { id });
             }
         }
     }

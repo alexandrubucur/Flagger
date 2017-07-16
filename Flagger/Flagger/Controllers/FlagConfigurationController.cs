@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
 using Flagger.Core;
 using Flagger.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +24,9 @@ namespace Flagger.Controllers
         [HttpGet("{userName}")]
         public Configuration Get(string userName)
         {
-            return _configurationGateway.Get(userName);
+            var configuration = _configurationGateway.Get(userName);
+
+            return configuration;
         }
 
         [HttpPost]

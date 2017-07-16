@@ -12,7 +12,7 @@ namespace Flagger.Controllers
     public class FeatureFlagController : Controller
     {
         private readonly IFlagGateway _flagGateway;
-        public readonly int SqlDuplicateExceptionNumber = 2601;
+        
 
         public FeatureFlagController(IFlagGateway flagGateway)
         {
@@ -41,7 +41,7 @@ namespace Flagger.Controllers
             catch (SqlException e)
             {
                 Console.WriteLine(e);
-                if (e.Number == SqlDuplicateExceptionNumber)
+                if (e.Number == SqlExceptions.SqlDuplicateExceptionNumber)
                 {
                     return StatusCode(400, $"{name} feature flag already exists");
                 }
@@ -55,8 +55,21 @@ namespace Flagger.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                _flagGateway.Delete(id);
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                if (e.Number == SqlExceptions.SqlForeignKeyViolation)
+                {
+                    return StatusCode(400, "Cannot delete an used feature flag.");
+                }
+            }
+            return StatusCode(200);
         }
     }
 }
