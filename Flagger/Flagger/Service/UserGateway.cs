@@ -35,5 +35,15 @@ namespace Flagger.Service
                 sqlConnection.Execute(sql, new { username = userName});
             }
         }
+
+        public void Delete(int id)
+        {
+            using (var sqlConnection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"DELETE FROM [User] WHERE Id_User = @id";
+
+                sqlConnection.Execute(sql, new { id });
+            }
+        }
     }
 }

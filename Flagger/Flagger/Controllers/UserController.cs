@@ -49,14 +49,22 @@ namespace Flagger.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                _userGateway.Delete(id);
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                if (e.Number == SqlExceptions.SqlForeignKeyViolation)
+                {
+                    return StatusCode(400, "Cannot delete an used feature flag.");
+                }
+            }
+            return StatusCode(200);
         }
     }
 }

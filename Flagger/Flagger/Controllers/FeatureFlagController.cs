@@ -49,11 +49,6 @@ namespace Flagger.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
