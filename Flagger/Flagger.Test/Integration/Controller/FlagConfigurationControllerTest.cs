@@ -1,6 +1,7 @@
 using Flagger.Controllers;
 using Flagger.Core;
 using Flagger.Model;
+using Flagger.Test.Utils;
 using FluentAssertions;
 using Moq;
 using Xunit;
@@ -14,17 +15,7 @@ namespace Flagger.Test.Integration.Controller
         {
             var mockRepo = new Mock<IConfigurationGateway>();
 
-            var feature = new Feature
-            {
-                Name = "Test",
-                Active = false
-            };
-
-            var configuration = new Configuration
-            {
-                User = "username",
-                Features = new [] { feature }
-            };
+            var configuration = new ConfigurationBuilder().Build();
 
             mockRepo.Setup(repo => repo.Get()).Returns(new[] {configuration});
 
@@ -40,11 +31,27 @@ namespace Flagger.Test.Integration.Controller
         {
             var mockRepo = new Mock<IConfigurationGateway>();
 
-            var feature = new Feature
+            var feature2 = new Feature
             {
-                Name = "Test",
-                Active = false
+                Name = "Test2",
+                Active = true
             };
+
+            var configuration = new ConfigurationBuilder().AddFeature(feature2).Build();
+
+            mockRepo.Setup(repo => repo.Get()).Returns(new[] { configuration });
+
+            var controller = new FlagConfigurationController(mockRepo.Object);
+
+            var result = controller.Get();
+
+            result.ShouldAllBeEquivalentTo(new[] { configuration });
+        }
+
+        [Fact]
+        public void Save()
+        {
+            var mockRepo = new Mock<IConfigurationGateway>();
 
             var feature2 = new Feature
             {
@@ -52,11 +59,7 @@ namespace Flagger.Test.Integration.Controller
                 Active = true
             };
 
-            var configuration = new Configuration
-            {
-                User = "username",
-                Features = new[] { feature , feature2 }
-            };
+            var configuration = new ConfigurationBuilder().AddFeature(feature2).Build();
 
             mockRepo.Setup(repo => repo.Get()).Returns(new[] { configuration });
 
