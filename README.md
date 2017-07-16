@@ -157,4 +157,90 @@ Create a new feature.
       "message":":Cannot delete an used feature flag."
     }
     ```
+    
+#### `GET` /api/flagconfiguration
+ Get configuration list.
+- Method: `GET`
+- Endpoint: `/api/flagconfiguration`
+- Responses:
+    * 200 OK
+    ```json
+    [
+	    {
+	        "user": "Service1",
+	        "features": [
+	            {
+	                "name": "Flag2",
+	                "active": false
+	            },
+	            {
+	                "name": "Flag3",
+	                "active": true
+	            },
+	            {
+	                "name": "Flag1",
+	                "active": true
+	            }
+	        ]
+	    },
+	    {
+	        "user": "Service2",
+	        "features": [
+	            {
+	                "name": "Flag3",
+	                "active": false
+	            }
+	        ]
+	    }
+	]
+    ```
+
+#### `GET` /api/flagconfiguration
+ Get features by user.
+- Method: `GET`
+- Endpoint: `/api/featureflag/:username`
+- Responses:
+    * 200 OK
+    ```json
+    {
+    "user": "Service1",
+	"features": [
+	        {
+	            "name": "Flag2",
+	            "active": false
+	        },
+	        {
+	            "name": "Flag3",
+	            "active": true
+	        },
+	        {
+	            "name": "Flag1",
+	            "active": true
+	        }
+	    ]
+	}
+    ```
+
+#### `POST` `Setup configuration`
+Configure feature for user.
+- Method: `POST`
+- Endpoint: `/api/feare`
+- Input:
+    The `Content-Type` HTTP header should be set to `application/json`
+
+    ```json
+   {
+	User : 'Service1',
+	Features : 
+		[
+			{Name : 'Flag1', Active : true},
+			{Name : 'Flag2', Active : false}
+		]
+	}
+    ```
+- Responses:
+    * 200 Ok
+
+    ```
+    
 
