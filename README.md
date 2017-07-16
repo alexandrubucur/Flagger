@@ -80,7 +80,7 @@ Create a new feature flag.
     * 400 Bad Request
     ```json
     {
-      "message":":feature user already exists"
+      "message":": user already exists"
     }
     ```
     
