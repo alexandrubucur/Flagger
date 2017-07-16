@@ -241,4 +241,8 @@ Configure feature for user.
 - Responses:
     * 200 Ok
 
+#TODO
 
+- Delete configuration
+- Authentication
+- Send ConfigurationChanged command to services
