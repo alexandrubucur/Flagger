@@ -230,17 +230,15 @@ Configure feature for user.
 
     ```json
    {
-	User : 'Service1',
-	Features : 
+	'User' : 'Service1',
+	'Features' : 
 		[
-			{Name : 'Flag1', Active : true},
-			{Name : 'Flag2', Active : false}
+			{'Name' : 'Flag1', 'Active' : true},
+			{'Name' : 'Flag2', 'Active' : false}
 		]
 	}
     ```
 - Responses:
     * 200 Ok
 
-    ```
-    
 
