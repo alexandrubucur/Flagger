@@ -61,7 +61,7 @@ namespace Flagger.Controllers
                 Console.WriteLine(e);
                 if (e.Number == SqlExceptions.SqlForeignKeyViolation)
                 {
-                    return StatusCode(400, "Cannot delete an used feature flag.");
+                    return StatusCode(400, "Cannot delete an used user.");
                 }
             }
             return StatusCode(200);
