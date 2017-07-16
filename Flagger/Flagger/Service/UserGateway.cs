@@ -19,7 +19,7 @@ namespace Flagger.Service
         {
             using (var sqlConnection = new SqlConnection(_connectionString))
             {
-                const string sql = @"SELECT Id_User ,UserName ,Admin, Password
+                const string sql = @"SELECT Id_User ,UserName ,Admin
                                      FROM [User]";
 
                 return sqlConnection.Query<User>(sql);
