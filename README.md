@@ -12,6 +12,10 @@ Asp.net Core Feature flag api.
 - [`GET` /api/featureflag/:id](#get-apifeatureflag-1) - Get feature by id
 - [`POST` /api/featureflag](#post-add-an-featureflag) - Add an feature
 - [`DELETE` /api/featureflag/:id](#delete-delete-featureflag) - Delete feature
+- [`GET` /api/flagconfiguration](#get-all-configurations) - Get all configurations
+- [`GET` /api/flagconfiguration/:username](#get-configurations-by-username) - Get configurations by username
+- [`POST` /api/flagconfiguration](#post-add-a-configuration) - Add a configuration
+- [`DELETE` /api/flagconfiguration](#delete-configuration) - Delete configuration
 
 ### API Documentation
 #### `GET` /api/featureflag
@@ -238,7 +242,7 @@ Create a new feature.
     ```
     
 #### `GET` /api/flagconfiguration
- Get configuration list.
+ Get all configurations.
 - Method: `GET`
 - Endpoint: `/api/flagconfiguration`
 - Responses:
@@ -275,7 +279,7 @@ Create a new feature.
     ```
 
 #### `GET` /api/flagconfiguration
- Get features by user.
+ Get configurations by user.
 - Method: `GET`
 - Endpoint: `/api/flagconfiguration/:username`
 - Responses:
@@ -309,19 +313,19 @@ Configure feature for user.
 
     ```json
    {
-	'User' : 'Service1',
-	'Features' : 
+	"User" : "Service1",
+	"Features" : 
 		[
-			{'Name' : 'Flag1', 'Active' : true},
-			{'Name' : 'Flag2', 'Active' : false}
+			{"Name" : "Flag1", "Active" : true},
+			{"Name" : "Flag2", "Active" : false}
 		]
-	}
+    }
     ```
 - Responses:
     * 200 Ok
 
-#### `DELETE` `Setup configuration`
-Delete user flag configurations.
+#### `DELETE` `Delete configuration`
+Delete user configurations.
 - Method: `DELETE`
 - Endpoint: `/api/flagconfiguration`
 - Input:
