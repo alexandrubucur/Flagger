@@ -206,7 +206,7 @@ Create a new feature flag.
 #### `POST` `Add a feature`
 Create a new feature.
 - Method: `POST`
-- Endpoint: `/api/feare`
+- Endpoint: `/api/featureflag`
 - Input:
     The `Content-Type` HTTP header should be set to `application/json`
 
@@ -226,7 +226,7 @@ Create a new feature.
 #### `DELETE` `Delete feature`
  Delete feature.
  - Method: `DELETE`
- - Endpoint: `/api/feature/:id` 
+ - Endpoint: `/api/featureflag/:id` 
  - Responses:
     * 200 Ok
 
@@ -277,7 +277,7 @@ Create a new feature.
 #### `GET` /api/flagconfiguration
  Get features by user.
 - Method: `GET`
-- Endpoint: `/api/featureflag/:username`
+- Endpoint: `/api/flagconfiguration/:username`
 - Responses:
     * 200 OK
     ```json
@@ -303,7 +303,7 @@ Create a new feature.
 #### `POST` `Setup configuration`
 Configure feature for user.
 - Method: `POST`
-- Endpoint: `/api/feare`
+- Endpoint: `/api/flagconfiguration`
 - Input:
     The `Content-Type` HTTP header should be set to `application/json`
 
@@ -320,8 +320,24 @@ Configure feature for user.
 - Responses:
     * 200 Ok
 
+#### `DELETE` `Setup configuration`
+Delete user flag configurations.
+- Method: `DELETE`
+- Endpoint: `/api/flagconfiguration`
+- Input:
+    The `Content-Type` HTTP header should be set to `application/json`
+
+    ```json
+    {
+	"User" : "Service1",
+	"Features" : ["Flag1", "flag2"]
+    }
+    ```
+- Responses:
+    * 200 Ok
+
+
 #TODO
 
-- Delete configuration
 - Authentication
 - Send ConfigurationChanged command to services
